@@ -1,0 +1,439 @@
+
+/**************************/
+/********页面样式***********/
+/**************************/
+html,body {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+body {
+    min-width:1200px;
+    margin:0 auto;
+    background-size:100% auto;
+    background: url("../images/backg.png");
+}
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image:url("../images/water.png") ;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+.logo{
+    background: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 32.5px;
+    width: 227px;
+    position: absolute;
+    left: 50px;
+    top:50px;
+    z-index: 20;
+}
+.selectDraw{
+    position: absolute;
+    right: 100px;
+    top:50px;
+    z-index: 20;
+}
+.luckPng{
+    height: 150px;
+    width: 250px;
+    background: url("../images/luck.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    position: absolute;
+    left: 50%;
+    top: 0px;
+    transform: translateX(-50%);
+}
+.selectDraw span{
+    font-size: 16px;
+}
+.el-select-dropdown__item.hover, .el-select-dropdown__item:hover{
+    background-color:#ff7f94!important;
+}
+.el-select-dropdown{
+    background-color:#bb364b!important;
+}
+.el-select-dropdown__item{
+    color: white!important;
+}
+.el-select-dropdown__item.is-disabled {
+    color: #c0c4cc!important;
+    cursor: not-allowed;
+}
+.el-input__inner{
+    background-color: #e73b58!important;
+   color: white!important;
+}
+.btn-box{
+    position: absolute;
+    width: 500px;
+    height: 60px;
+    bottom: 10px;
+    left: 50%;
+    top:calc(380px + 150px + 10px);
+    transform: translate3d(-50%,0,0);
+    display: flex;
+}
+.btn-box a{
+    flex: 1;
+}
+.btn-box a.clickDraw{
+    background: url("../images/choujiang.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+}
+.btn-box a.getWinner{
+    background: url("../images/mingdan.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+}
+.btn-box a.continueDraw{
+    background: url("../images/continue.png");
+    background-repeat: no-repeat;
+    background-size:auto 100%;
+    background-position: center;
+}
+.begin-btn {
+    position:absolute;
+    bottom:50px;
+    left:50%;
+    width:240px;
+    margin-left:-120px;
+    height:40px;
+    line-height:40px;
+    font-size:16px;
+    font-weight:bold;
+    border-radius:5px;
+    color:#fff;
+    background-color:#e4393c;
+    box-shadow:2px 3px 8px rgba(0,0,0,0.8);
+    text-align:center;
+    z-index: 10;
+}
+.begin-btn:hover {
+    color:#fff;
+}
+.luckyDraw {
+    position:absolute;
+    top:150px;
+    left:50%;
+    width:600px;
+    height:380px;
+    transform:translate3d(-50%,0,0);
+    border-radius:5px;
+    background-color:transparent;
+    background-image: url("../images/content.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /*border: 1px solid red;*/
+   /* box-shadow:0 0 20px rgba(0,0,0,0.8);*/
+    overflow:hidden;
+    z-index:10;
+}
+.luckyDraw .title {
+    height:50px;
+    line-height:50px;
+    font-size:18px;
+    font-weight:bold;
+    color:#fff;
+    text-align:center;
+    background:#eff3f5;
+    background:-webkit-linear-gradient(left,#f6ad36,#cf5a5d);
+    /* Safari 5.1 - 6.0 */
+    background:-o-linear-gradient(right,#f6ad36,#cf5a5d);
+    /* Opera 11.1 - 12.0 */
+    background:-moz-linear-gradient(right,#f6ad36,#cf5a5d);
+    /* Firefox 3.6 - 15 */
+    background:linear-gradient(to right,#f6ad36,#cf5a5d);
+    /* 标准的语法 */
+    position:relative;
+}
+.luckyDraw .title a {
+    position:absolute;
+    top:0;
+    right:0;
+    display:block;
+    width:50px;
+    height:50px;
+    font-size:12px;
+    color:#fff;
+}
+.luckyDraw .draw {
+    position:relative;
+    height:380px;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+    color:white;
+
+}
+.luckyDraw .draw .tips{
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 30px;
+    width: 80%;
+    margin: 0 auto;
+    position: absolute;
+    left: 10%;
+}
+.luckyDraw .draw .userPicWrap{
+    width: 150px;
+    height: 150px;
+   position: absolute;
+    top: 80px;
+    left: calc(50% - 75px);
+}
+
+.luckyDraw .draw > .content {
+    /*position:absolute;*/
+   /* top:30px;
+    bottom:30px;
+    line-height:140px;*/
+    /*top: 20%;
+    width:100%;*/
+     position: absolute;
+     top: 260px;
+     width: 100%;
+}
+.luckyDraw .draw > .getDrawList{
+    position: absolute;
+    /* background: #a50912; */
+    height: 283px;
+    width: 492px;
+    left: 50%;
+    top: 58px;
+    transform: translateX(-50%);
+}
+}
+.nameListdraw{
+}
+.nameListdraw a{
+    color: white;
+    line-height: 80px;
+    position: relative;
+    font-size: 25px;
+}
+.nameListdraw a:after{
+    content: '';
+    width: 100px;
+    height: 1px;
+    background: #b73b42;
+    position: absolute;
+    top: 50%;
+    left: 120px;
+}
+.nameListdraw a:before{
+    content: '';
+    width: 100px;
+    height: 1px;
+    background: #b73b42;
+    position: absolute;
+    top: 50%;
+    right: 120px;
+}
+.luckyDraw .draw > div img{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+.luckyDraw .speed {
+    width:100%;
+    padding-top:40px;
+    line-height:20px;
+    font-size:14px;
+    color:#333;
+    text-align:center;
+}
+.luckyDraw .speed span {
+    font-size:16px;
+    font-weight:bold;
+}
+.luckyDraw .speed .cover {
+    display:inline-block;
+    width:240px;
+    margin:0 10px;
+    vertical-align:top;
+    position:relative;
+}
+.luckyDraw .speed em {
+    position:absolute;
+    bottom:-20px;
+    width:50px;
+    margin-left:-25px;
+}
+.luckyDraw .speed input {
+    width:100%;
+}
+.luckyDraw .btn-box {
+    text-align:center;
+}
+.luckyDraw .btn-box a {
+    display:inline-block;
+    width:180px;
+    height:40px;
+    margin:0 20px;
+    font-size:16px;
+    font-weight:bold;
+    line-height:40px;
+    border-radius:3px;
+    color:#fff;
+    background-color:#e4393c;
+}
+.contentList{
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    font-weight: normal;
+    background:#7b1716 ;
+    width: 96%;
+
+    margin: 0 auto;
+
+}
+.titleList{
+    width: 100%;
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    border-bottom:1px solid #992827;
+}
+.titleList span{
+    flex: 1;
+    line-height: 40px;
+}
+.listShow{
+    width: 100%;
+    height: 162px;
+    overflow-y: auto;
+}
+.listShow .listItem{
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+}
+.listShow .listItem span{
+    flex: 1;
+    line-height: 30px;
+}
+
+#style-3::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+#style-3::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 3px;
+}
+#style-3::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+/**********************************/
+/**以下代码结合vue transition的name使用**/
+/**********************************/
+
+/**content变化的动画**/
+.out-in-enter {
+     -webkit-transform:translateY(30px);
+     -moz-transform:translateY(30px);
+     -ms-transform:translateY(30px);
+     -o-transform:translateY(30px);
+     transform:translateY(30px);
+     opacity:0;
+ }
+.out-in-leave-to {
+    -webkit-transform:translateY(-30px);
+    -moz-transform:translateY(-30px);
+    -ms-transform:translateY(-30px);
+    -o-transform:translateY(-30px);
+    transform:translateY(-30px);
+    opacity:0;
+}
+.out-in-enter-active,.out-in-leave-active {
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    -ms-transition:all .5s;
+    -o-transition:all .5s;
+    transition:all .5s;
+}
+
+
+
+
+.out-intile-enter {
+    -webkit-transform:translateY(30px);
+    -moz-transform:translateY(30px);
+    -ms-transform:translateY(30px);
+    -o-transform:translateY(30px);
+    transform:translateY(30px);
+    opacity:0;
+}
+.out-intile-leave-to {
+    -webkit-transform:translateY(-30px);
+    -moz-transform:translateY(-30px);
+    -ms-transform:translateY(-30px);
+    -o-transform:translateY(-30px);
+    transform:translateY(-30px);
+    opacity:0;
+}
+.out-intile-enter-active,.out-intile-leave-active {
+    -webkit-transition:all 1s;
+    -moz-transition:all 1s;
+    -ms-transition:all 1s;
+    -o-transition:all 1s;
+    transition:all 1s;
+}
+
+
+
+
+
+
+/**弹框出现隐藏的动画**/
+.bounce-enter-active {
+    animation:bounce-in .5s;
+}
+.bounce-leave-active {
+    -webkit-transition:all .5s;
+    -moz-transition:all .5s;
+    -ms-transition:all .5s;
+    -o-transition:all .5s;
+    transition:all .5s;
+}
+.bounce-leave-to {
+    opacity:0;
+    height:0;
+}
+@keyframes bounce-in {
+    0% {
+        transform: translateX(9%);
+    }
+    16.6% {
+        transform: translateX(-9%);
+    }
+    33.33% {
+        transform: translateX(6%);
+    }
+    50% {
+        transform: translateX(-6%);
+    }
+    66.6% {
+        transform: translateX(3%);
+    }
+    83.33% {
+        transform: translateX(-3%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
