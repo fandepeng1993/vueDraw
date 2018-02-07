@@ -7,7 +7,18 @@
     <link rel="stylesheet" href="css/choujiang.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery.min.js"></script>
-
+    <script type="text/javascript">
+        function change(n){
+                if(n>2) n=1;  // 一共2张图片，所以循环替换
+                n++;
+                var t = "images/" + n + ".png";
+                $(".luckyDraw").css("background-image", "url("+ t +")");
+                setTimeout("change("+n+")",500);
+            }
+        $(function(){
+            setTimeout("change(1)", 500);    
+        })
+    </script>
 </head>
 <body>
 <div id="container" class="container">
@@ -32,20 +43,32 @@
             <div v-show="luckyDrawShow" id="luckyDraw" class="luckyDraw">
                 <!--<p class="title" style="display: none">抽奖活动<a @click="luckyDrawShow=false">关闭</a></p>-->
                 <div id="draw" class="draw">
-                    <transition name="out-intile" >
+                    <transition name="out-intile">
                         <div class="tips" :key="finnal" v-cloak="" >
                             <p>{{finnal}}</p>
                         </div>
                     </transition>
-
-                    <div class="userPicWrap" v-show="tabchange">
-                        <img class="uerPic" src="images/touxiang.png" alt="">
+                    <transition name="out-intile">
+                        <div class="drawInfo" v-show="value2" :key="finnal" v-cloak="" >
+                            <p>奖项：{{drawName}}</p>
+                            <p>数量:{{dNum}}</p>
+                            <p>奖品:{{drawGoods}}</p>
+                        </div>
+                    </transition>
+                    <!--<div class="userPicWrap" v-show="tabchange">
+                        <img class="uerPic" v-bind:src="'images/'+drawImg+'.png'" alt="">
+                    </div>-->
+                    <div class="userPicWrap style-3" >
+                        <ul>
+                            <li v-for="i in curentdrawListpeople">{{i}}</li>
+                        </ul>
                     </div>
                     <transition name="out-in">
                         <div v-show="tabchange" :key="winner" v-cloak="" class="content">
                             <p>{{winner}}</p>
                         </div>
                     </transition>
+
                     <transition name="out-in-out">
                         <div v-show="!tabchange" class="getDrawList">
                             <div class="nameListdraw">
@@ -60,7 +83,7 @@
                                         <span>奖项</span>
                                         <span>奖品</span>
                                     </div>
-                                    <div class="listShow" id="style-3">
+                                    <div class="listShow style-3">
                                         <div v-for="item in tableData3" class="listItem">
                                             <span>{{item.Num}}</span>
                                             <span>{{item.name}}</span>
@@ -70,38 +93,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--<el-table
-                                        :data="tableData3"
-                                        style="width: 100%;background:#7b1716;">
-                                    <el-table-column
-                                            prop="Num"
-                                            label="工号"
-                                    >
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="name"
-                                            label="姓名"
-                                    >
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="address"
-                                            label="部门">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="drawNum"
-                                            label="奖项">
-                                    </el-table-column>
-                                    <el-table-column
-                                            prop="draw"
-                                            label="奖品">
-                                    </el-table-column>
-                                </el-table>-->
                             </template>
                         </div>
                     </transition>
                 </div>
             </div>
-
         </template>
     </transition>
     <div class="btn-box" v-show="tabchange===true">
@@ -112,90 +108,7 @@
     <div class="btn-box" style="display: none" v-show="tabchange===false">
 
         <a @click="tabchange=true" class="continueDraw"></a>
-        <!--<a @click="end" class="getWinner">结束</a>-->
     </div>
-    <!--<div class="speed" style="display: none">
-        <span>抽奖速度：</span>
-        快
-        <div class="cover">
-            <input type="range" v-model="times" min="100" max="3000">
-            <em :style="{left: times/30 + '%'}">{{times/1000}}s</em>
-        </div>
-        慢
-    </div>-->
-</div>
-<div id="j_list" style="display:none">
-    <!--假设这是后端传来的已经报名的学员-->
-    <p><span class="name">罗俊</span><span class="tell">182****3297</span></p>
-    <p><span class="name">卢鑫</span><span class="tell">139****7900</span></p>
-    <p><span class="name">邹欢军</span><span class="tell">135****3652</span></p>
-    <p><span class="name">韩新利</span><span class="tell">186****4415</span></p>
-    <p><span class="name">郁梦梦</span><span class="tell">134****1086</span></p>
-    <p><span class="name">吴永青</span><span class="tell">151****2568</span></p>
-    <p><span class="name">周超</span><span class="tell">134****9281</span></p>
-    <p><span class="name">张俊荣</span><span class="tell">137****4556</span></p>
-    <p><span class="name">郑文明</span><span class="tell">134****1047</span></p>
-    <p><span class="name">刘昕茹</span><span class="tell">135****1156</span></p>
-    <p><span class="name">卢鑫</span><span class="tell">139****7900</span></p>
-    <p><span class="name">胡祖慧</span><span class="tell">138****9800</span></p>
-    <p><span class="name">郁梦梦</span><span class="tell">134****1086</span></p>
-    <p><span class="name">陈杰</span><span class="tell">130****7529</span></p>
-    <p><span class="name">宋向东</span><span class="tell">182****8008</span></p>
-    <p><span class="name">王冬霞</span><span class="tell">151****9806</span></p>
-    <p><span class="name">郑荣贵</span><span class="tell">186****7399</span></p>
-    <p><span class="name">陈红丹</span><span class="tell">135****4530</span></p>
-    <p><span class="name">胡俊谟</span><span class="tell">150****1391</span></p>
-    <p><span class="name">唐金娟</span><span class="tell">159****6414</span></p>
-    <p><span class="name">王梓涵</span><span class="tell">139****1758</span></p>
-    <p><span class="name">王丽娜</span><span class="tell">137****9023</span></p>
-    <p><span class="name">夏美菊</span><span class="tell">132****0312</span></p>
-    <p><span class="name">周江权</span><span class="tell">136****8163</span></p>
-    <p><span class="name">胡江浩</span><span class="tell">158****5799</span></p>
-    <p><span class="name">叶金寿</span><span class="tell">133****1980</span></p>
-    <p><span class="name">胡丽丽</span><span class="tell">136****6419</span></p>
-    <p><span class="name">黄香</span><span class="tell">139****4141</span></p>
-    <p><span class="name">王文君</span><span class="tell">159****8099</span></p>
-    <p><span class="name">李丽</span><span class="tell">187****3821</span></p>
-    <p><span class="name">徐迎</span><span class="tell">158****2203</span></p>
-    <p><span class="name">裘刘</span><span class="tell">139****3035</span></p>
-    <p><span class="name">熊萍</span><span class="tell">159****5297</span></p>
-    <p><span class="name">俞红庆</span><span class="tell">135****9533</span></p>
-    <p><span class="name">谢静</span><span class="tell">156****8239</span></p>
-    <p><span class="name">华平</span><span class="tell">137****4888</span></p>
-    <p><span class="name">徐俊瑶</span><span class="tell">152****6220</span></p>
-    <p><span class="name">李贵虹</span><span class="tell">151****4711</span></p>
-    <p><span class="name">方利勇</span><span class="tell">138****0609</span></p>
-    <p><span class="name">李婷</span><span class="tell">137****7074</span></p>
-    <p><span class="name">王文龙</span><span class="tell">135****1946</span></p>
-    <p><span class="name">祝庆娟</span><span class="tell">132****3820</span></p>
-    <p><span class="name">马爱育</span><span class="tell">180****1002</span></p>
-    <p><span class="name">陈鸿昌</span><span class="tell">137****1882</span></p>
-    <p><span class="name">盛丽娟</span><span class="tell">187****5227</span></p>
-    <p><span class="name">陈智燕</span><span class="tell">137****8523</span></p>
-    <p><span class="name">张丽萍</span><span class="tell">131****1251</span></p>
-    <p><span class="name">柴倩</span><span class="tell">151****6990</span></p>
-    <p><span class="name">徐文豪</span><span class="tell">173****8171</span></p>
-    <p><span class="name">王强</span><span class="tell">135067853</span></p>
-    <p><span class="name">BIGBIGWANG</span><span class="tell">156****1919</span></p>
-    <p><span class="name">方金英</span><span class="tell">159****7586</span></p>
-    <p><span class="name">王冉英</span><span class="tell">133****3568</span></p>
-    <p><span class="name">赵群</span><span class="tell">135****9847</span></p>
-    <p><span class="name">周江权</span><span class="tell">136****8163</span></p>
-    <p><span class="name">浦寅姗</span><span class="tell">158****3323</span></p>
-    <p><span class="name">王冉英</span><span class="tell">133****3568</span></p>
-    <p><span class="name">鲁海芬</span><span class="tell">159****8195</span></p>
-    <p><span class="name">叶青</span><span class="tell">137****7755</span></p>
-    <p><span class="name">赵珍</span><span class="tell">130****9181</span></p>
-    <p><span class="name">李巍利</span><span class="tell">137****8030</span></p>
-    <p><span class="name">余丹</span><span class="tell">187****4544</span></p>
-    <p><span class="name">沈德军</span><span class="tell">189****9733</span></p>
-    <p><span class="name">苏培勇</span><span class="tell">186****6897</span></p>
-    <p><span class="name">楼萍萍</span><span class="tell">159****9912</span></p>
-    <p><span class="name">李成钢</span><span class="tell">181****8288</span></p>
-    <p><span class="name">钱超南</span><span class="tell">182****5050</span></p>
-    <p><span class="name">董虹霞</span><span class="tell">150****1358</span></p>
-    <p><span class="name">陆永</span><span class="tell">131****0716</span></p>
-    <p><span class="name">庄建红</span><span class="tell">138****9118</span></p>
 </div>
 <script src="js/vue.js"></script>
 <script src="js/index.js"></script>
@@ -209,69 +122,138 @@
             timer: null, //定时器
             autoPlause:null,//定时器
             times: 150, //抽奖速度
+            delayshow:null,
             len: null, //抽奖人数
             wIndex: null, //抽奖者位置
             draw: [], //抽奖者
-            finnal:"",//中奖tips
-            watingTime:3000,
+            drawfb:[],
+            finnal:'',//中奖tips
+            watingTime:10000,
+            drawLen:0,
             tabchange:true,/*tab切换*/
-            /*定义每个奖项的最大抽取次数*/
-            tedrawTime:3,/*默认特等奖和其他都为3次*/
-            yidrawTime:3,
-            erdrawTime:3,
-            sandrawTime:3,
-            luckrawTime:3,
             /* 一等奖，二等奖，三等奖获得者 */
+            drawImg:'touxiang',
+            drawTimes:0,
             tedraw:[],
+            drawpeople:0,
             yidraw:[],
             erdraw:[],
             sandraw:[],
+            sidraw:[],
+            fivedraw:[],
+            sixdraw:[],
             luckdraw:[],
             /*获奖名单排序从上到下，默认为空*/
             tableData3: [],
+            curentdrawarr:[],
+            curentdrawListpeople:[],
+            finnal:'请选取奖项',
             /*定义奖项的奖励*/
             options2: [
                 {
                     value: 'tedraw',
                     label: '特等奖',
-                    drawGood:'苹果iPad'
+                    drawGood:'苹果iPad',
+                    num:1, //奖品数量
+                    imgurl:'alldraw/te',
+                    drawtimes:1
+
                 }, {
                     value: 'yidraw',
                     label: '一等奖',
-                    drawGood:'OPPO手机'
+                    drawGood:'KINDLE',
+                    num:2,
+                    imgurl:'alldraw/1',
+                    drawtimes:2
                 }, {
                     value: 'erdraw',
                     label: '二等奖',
-                    drawGood:'美的电磁炉'
+                    drawGood:'电压力锅',
+                    num:6,
+                    imgurl:'alldraw/2',
+                    drawtimes:2
                 }, {
                     value: 'sandraw',
                     label: '三等奖',
-                    drawGood:'海尔电饭锅'
+                    drawGood:'四件套',
+                    num:10,
+                    imgurl:'alldraw/3',
+                    drawtimes:3
                 },  {
+                    value: 'sidraw',
+                    label: '四等奖',
+                    drawGood:'小米手环',
+                    num:15,
+                    imgurl:'alldraw/4',
+                    drawtimes:3
+                },{
+                    value: 'fivedraw',
+                    label: '五等奖',
+                    drawGood:'坚果礼盒',
+                    num:30,
+                    imgurl:'alldraw/5',
+                    drawtimes:3
+                },{
+                    value: 'sixdraw',
+                    label: '六等奖',
+                    drawGood:'保温杯/电吹风',
+                    num:50,
+                    imgurl:'alldraw/6',
+                    drawtimes:5
+                }/*,{
                     value: 'luckdraw',
-                    label: '幸运奖',
-                    drawGood:'50元代金券'
-                }
+                    label: '安慰奖',
+                    drawGood:'待定',
+                    num:7,
+                    imgurl:'touxiang'
+                }*/
             ],
-            value2:'',//奖项model绑定改变select值（elemet ui 组件）
-            drawName:'',//奖项名称
-            drawGoods:'', //奖励物品名称
+            value2:'',// 奖项model绑定改变select值（elemet ui 组件）
+            drawName:'奖项名称',//奖项名称
+            drawGoods:'奖励物品名称', //奖励物品名称
+            dNum:'剩余数量',
             isDrawing:false,/*正在抽奖中不允许点击select*/
             ischeckSatae:false/*抽奖过程中不允许去查看获奖压面*/
         },
         methods: {
             start: function() { //开始抽奖
-                this.isDrawing=true;
-                this.ischeckSatae=true
-                this.len = this.len || this.draw.length; //获取抽奖人数
                 if(this.value2===''){
                     alert('开始抽奖前必须选择奖项')
                     return
                 }
+                this.curentdrawListpeople=[];
+                this.isDrawing=true;
+                this.ischeckSatae=true
+                this.len = this.draw.length; //获取抽奖人数
+                this.drawfb = this.draw.slice();
                 if (!this.timer) { //如果抽奖不是正在进行中则开始抽奖
-                    this.getWinner();
+                    if(this.isDrawing){
+                        //如果要求抽奖几次数据，根据奖品数量来
+                        if(this.drawTimes>0){
+                           /* console.log(this.drawTimes)
+                            console.log(this.len)*/
+                            this.finnal=`正在抽取${this.drawName}...`
+                            this.drawpeople=Math.round(this.dNum/this.drawTimes)
+                            this.getWinner(this.drawpeople)
+                            this.curentdrawarr.sort(this.sortNumber)
+                          /*  console.log(this.curentdrawarr)*/
+                            this.showdelaypeople()
+                            for(var i in this.options2){
+                                if(this.options2[i].value===this.value2){
+                                    this.options2[i].drawtimes=this.options2[i].drawtimes-1
+                                    this.drawTimes=this.options2[i].drawtimes
+                                }
+                            }
+                        }else {
+                            alert('此奖项已经抽取完毕，请选择其他奖项')
+                            this.value2=''
+                            this.isDrawing=false
+                            return
+                        }
+                    }
+                    //一次抽一个
                     this.timer = setInterval(function() {
-                        this.getWinner();
+                        this.animationchange();
                     }.bind(this), this.times)
                     this.autoPlause=setTimeout(function () {
                         this.end()
@@ -280,48 +262,67 @@
                     alert('请等待该次抽奖结束！')
                 }
             },
-            getWinner: function() { //根据随机数找到当前的中奖者
-                this.wIndex = this.GetRandom(0, this.len - 1);
-                this.currentPerson=this.draw[this.wIndex]
-                /*console.log(this.currentPerson)*/
+            getWinner: function(drawpeople) { //根据随机数找到当前的中奖者
+                for(var i=0;i<drawpeople;i++){
+                    this.getx(this.curentdrawarr);
+                }
+            },
+            showdelaypeople:function () {
+                this.delayshow=setInterval(function () {
+                    if(this.drawLen > this.drawpeople-1){
+                        return
+                    }
+                    var currentPerson=this.draw[this.curentdrawarr[0]]
+                    this.curentdrawListpeople.push(currentPerson.prtpNo + " -- " + currentPerson.prtpName)
+                    var templeObj={};
+                        templeObj.Num=currentPerson.prtpNo;
+                        templeObj.name=currentPerson.prtpName;
+                        templeObj.address=currentPerson.company;
+                        templeObj.drawNum=this.drawName;
+                        templeObj.draw=this.drawGoods;
+                    this[this.value2].push(templeObj)
+                    this.dNum--
+                    this.draw.splice(this.curentdrawarr[0],1)
+                    this.curentdrawarr.shift()
+                    this.drawLen++
+                }.bind(this), this.watingTime/this.drawpeople)
+            },
+            getx:function(arr){
+                for(var i=0;i>-1;i++){
+                    var flag = true;
+                    var num = this.GetRandom(0, this.len - 1);
+                    for(var i in arr){
+                        if(arr[i] === num){
+                            flag= false;
+                            break;
+                        }
+                    }
+                    if(flag === true){
+                        arr.push(num);
+                        return;
+                    }
+                }
+            },
+            animationchange:function () {
+                this.wIndex = this.GetRandom(0, this.drawfb.length-1);
+                this.currentPerson=this.drawfb[this.wIndex]
                 this.winner = this.currentPerson.prtpNo + " -- " + this.currentPerson.prtpName;
-
             },
             changeContent:function () {
-                    this.tabchange = !this.tabchange
+                this.tabchange = !this.tabchange
             },
             end: function() { //结束抽奖
                 clearInterval(this.timer);
+                clearInterval(this.delayshow);
                 clearTimeout(this.autoPlause);
                 this.timer = null;
-                this.currentPerson=this.draw[this.wIndex]
-                if(this.value2!==''){
-                    this.getDraw(this.value2)
-                }
-                this.finnal=`恭喜！~${this.currentPerson.company}~${this.currentPerson.prtpName}人品爆棚抽中了${this.drawName}`
-                this.value2='';
+                this.delayshow = null;
+                this.currentPerson=this.drawfb[this.wIndex]
+                this.finnal=`恭喜！~下列获奖者人品爆棚抽中了${this.drawName}`
                 this.getdrawList();
+                this.drawLen=0;
                 this.isDrawing=false;
                 this.ischeckSatae=false;
-            },
-            getDraw:function (item) {//存入当前获奖人信息
-                /*console.log(item)*/
-                var options2Len= this.options2
-                var templeObj={};
-                for(var i=0;i<options2Len.length;i++){
-                    if(options2Len[i].value===item){
-                       this.drawName=options2Len[i].label;
-                       this.drawGoods=options2Len[i].drawGood;
-                       templeObj.Num=this.currentPerson.prtpNo;
-                       templeObj.name=this.currentPerson.prtpName;
-                       templeObj.address=this.currentPerson.company;
-                       templeObj.drawNum=this.drawName;
-                       templeObj.draw=this.drawGoods;
-                       this[item].push(templeObj);
-                    }else {
-                        continue
-                    }
-                }
             },
             GetRandom: function(Min, Max) { //随机数
                 return Min + (Math.floor(Math.random() * (Max - Min)));
@@ -329,14 +330,12 @@
             getDataPerson:function () {
                 var that=this
                 $.getJSON("json/allperson.json",function(data){
-                    /*console.log(data.allperson)*/
                     that.draw=data.allperson
                     that.winner = that.draw[0].prtpNo + " -- " +that.draw[0].prtpName;
                 })
             },
             getdrawList:function () {
-                this.tableData3=this.tedraw.concat(this.yidraw.concat(this.erdraw.concat(this.sandraw.concat(this.luckdraw))))
-
+                this.tableData3=this.tedraw.concat(this.yidraw.concat(this.erdraw.concat(this.sandraw.concat(this.sidraw.concat(this.fivedraw.concat(this.sixdraw.concat(this.luckdraw)))))))
             },
             iscanTab:function () {
                 if(this.ischeckSatae){
@@ -344,14 +343,37 @@
                 }else {
                     this.tabchange=false
                 }
-
+            },
+            checkdValue2:function() {
+                if (this.value2) {
+                    var op2=this.options2;
+                    for(var i=0;i<op2.length;i++){
+                        if(op2[i].value === this.value2) {
+                             this.drawName=op2[i].label;
+                             this.drawGoods=op2[i].drawGood;
+                             this.dNum= op2[i].num - this[this.value2].length;
+                             this.drawTimes=op2[i].drawtimes;
+                             this.curentdrawListpeople=[];
+                             this.finnal=`请开始抽取${this.drawName}`;
+                             this.drawLen=0;
+                        }
+                    }
+                }
+                else {
+                    this.drawName='未选择奖项';
+                    this.drawGoods='未选择奖品';
+                    this.finnal='请选择奖项'
+                    this.dNum=0;
+                    this.drawTimes=0;
+                    this.curentdrawListpeople=[];
+                    this.drawLen=0;
+                }
+            },
+            sortNumber: function (a,b){
+                    return b - a
             }
         },
         computed:{
-            /*计算属性*/
-           /* tableData3:function() {
-            return this.tedraw.concat(this.yidraw.concat(this.erdraw.concat(this.sandraw.concat(this.luckdraw))))
-            }*/
         },
         watch: {
             times: function() { //抽奖速度被调整后
@@ -362,52 +384,49 @@
                     }.bind(this), this.times)
                 }
             },
-            tableData3:function () {
-              /*console.log(this.tableData3)*/
+            value2: function (newval) {
+                this.checkdValue2()
             },
-            /*luckyDrawShow: function() {
-                if (!this.luckyDrawShow) { //弹窗关闭时，清除定时器与中奖者
-                    this.end();
-                    this.winner = "";
-                }
-            },*/
+            tableData3:function () {
+            },
             tedraw:function (newVal) {
-                if(newVal.length>=3){
+                if(newVal.length>=this.options2[0].num){
                     this.options2[0].disabled=true
                 }
             },
             yidraw:function (newVal) {
-                if(newVal.length>=3){
+                if(newVal.length>=this.options2[1].num){
                     this.options2[1].disabled=true
                 }
             },
             erdraw:function (newVal) {
-                if(newVal.length>=3){
+                if(newVal.length>=this.options2[2].num){
                     this.options2[2].disabled=true
                 }
             },
             sandraw:function (newVal) {
-                if(newVal.length>=3){
+                if(newVal.length>=this.options2[3].num){
                     this.options2[3].disabled=true
                 }
             },
-            luckdraw:function (newVal) {
-                if(newVal.length>=3){
+            sidraw:function (newVal) {
+                if(newVal.length>=this.options2[4].num){
                     this.options2[4].disabled=true
                 }
+            },
+            fivedraw:function (newVal) {
+                if(newVal.length>=this.options2[5].num){
+                    this.options2[5].disabled=true
+                }
+            },
+            sixdraw:function (newVal) {
+                if(newVal.length>=this.options2[6].num){
+                    this.options2[6].disabled=true
+                }
             }
-
         },
-        created: function() { //创建实例之后获取学员名单
+        created: function() { //创建实例之后获取人员名单
             this.getDataPerson();
-            /*var draws = document.getElementById("j_list").getElementsByTagName("p");
-            for (var i = 0; i < draws.length; i++) {
-                this.draw.push({
-                    name: draws[i].getElementsByClassName("name")[0].innerHTML,
-                    tel: draws[i].getElementsByClassName("tell")[0].innerHTML
-                })
-            }*/
-
         }
     })
 </script>
